@@ -1,0 +1,244 @@
+/* Base styles for the entire page */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  /* Cinematic deep space gradient background */
+  background: linear-gradient(
+    135deg,
+    #050510 0%, /* Dark navy/black */
+    #100a20 50%, /* Deep purple-black */
+    #050510 100%
+  );
+  color: #e0e0e0; /* Light grey text for contrast */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Full viewport height */
+  overflow: hidden; /* Prevent scrolling */
+  /* Disable text selection and callouts for game feel */
+  -webkit-touch-call-out: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Main container for the game canvas and UI elements */
+#game-container {
+  position: relative;
+  width: 800px; /* Fixed width for desktop */
+  height: 600px; /* Fixed height for desktop */
+  border: 2px solid #5a5a7a; /* Subtle metallic border */
+  border-radius: 12px; /* Rounded corners for modern look */
+  /* Glowing box shadow for cyberpunk feel */
+  box-shadow: 0 0 30px rgba(80, 80, 150, 0.4), 0 0 15px rgba(255, 255, 255, 0.1);
+  overflow: hidden; /* Important to contain game elements within bounds */
+  /* Dynamic background for nebula effect, controlled by JS drawing */
+  background-color: #000000; /* Default background for canvas if JS fails */
+}
+
+/* Canvas element for game rendering */
+#game-canvas {
+  display: block; /* Remove extra space below canvas */
+  width: 100%; /* Fill game container */
+  height: 100%; /* Fill game container */
+  background-color: transparent; /* Allows CSS background to show if JS doesn't draw over it */
+}
+
+/* Focus style for keyboard accessibility */
+#game-canvas:focus-visible {
+  outline: 2px solid #00ffff; /* Bright cyan outline */
+  outline-offset: 2px;
+}
+
+/* UI elements positioned over the canvas */
+#ui {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #aaffff; /* Light cyan text */
+  /* Neon glow effect for text */
+  -webkit-text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
+  z-index: 5; /* Ensure UI is above game elements */
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* Space between UI items */
+}
+
+/* Styling for score, level, and health display boxes */
+.score,
+.level,
+.health {
+  background: rgba(40, 40, 70, 0.6); /* Semi-transparent dark background */
+  padding: 5px 10px;
+  min-width: 120px;
+  text-align: center;
+  border-radius: 5px;
+  /* Glassmorphism blur effect */
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px); 
+  border: 1px solid rgba(80, 80, 150, 0.3); /* Subtle border */
+}
+
+/* Container for reward indicators */
+.rewards {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  display: flex;
+  gap: 10px;
+  z-index: 5;
+}
+
+/* Individual reward indicator styling */
+.reward-indicator {
+  display: none; /* Hidden by default, shown when active */
+  font-size: 28px; /* Large emoji size */
+  color: #fff; /* White emoji color */
+  /* White neon glow for emojis */
+  -webkit-text-shadow: 0 0 10px #fff;
+  text-shadow: 0 0 10px #fff;
+  /* Pulsing animation for active rewards */
+  -webkit-animation: pulse 1s infinite alternate;
+  animation: pulse 1s infinite alternate;
+  background: rgba(40, 40, 70, 0.6); /* Consistent background */
+  padding: 5px;
+  border-radius: 5px;
+  /* Glassmorphism blur effect */
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(80, 80, 150, 0.3);
+}
+
+/* Overlay screens (Start and Game Over) */
+.overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background-color: rgba(0, 0, 15, 0.9); /* Dark semi-transparent background */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 10; /* Ensure overlays are on top */
+  color: #ffffff;
+  /* Backdrop blur for glassmorphism effect */
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px); 
+}
+
+/* Styling for overlay titles */
+.overlay h1 {
+  font-size: 4em;
+  margin-bottom: 20px;
+  color: #00ffff; /* Bright cyan color */
+  /* Intense neon glow for titles */
+  -webkit-text-shadow: 0 0 15px #00ffff, 0 0 30px #00ffff;
+  text-shadow: 0 0 15px #00ffff, 0 0 30px #00ffff;
+  letter-spacing: 3px;
+}
+
+/* Styling for overlay paragraphs */
+.overlay p {
+  font-size: 1.2em;
+  margin-bottom: 30px;
+  color: #cccccc; /* Light grey for readability */
+}
+
+.game-over-quote {
+  font-style: italic;
+  font-weight: normal;
+  color: #f0f0f0;
+  margin-top: -15px;
+  margin-bottom: 20px !important;
+  max-width: 80%;
+}
+
+
+.overlay p.instruction-text {
+  margin-bottom: 10px; /* Smaller margin for instructions */
+}
+
+/* Highest score display on start and game over screens */
+.highest-score {
+  font-size: 1.1em;
+  color: #ffcc00; /* Yellow for high score */
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+
+/* Styling for overlay buttons */
+.overlay button {
+  font-size: 1.5em;
+  padding: 15px 30px;
+  background-color: #00ffff; /* Cyan button background */
+  color: #000000; /* Black text for high contrast */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 0 15px #00ffff; /* Glowing button shadow */
+  /* Smooth transition for hover effects */
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease; 
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* Hover effects for buttons */
+.overlay button:hover {
+  background-color: #00e6e6; /* Slightly lighter cyan */
+  box-shadow: 0 0 25px #00ffff, 0 0 5px #ffffff; /* More intense glow */
+  -webkit-transform: translateY(-2px); /* Lift button slightly */
+  transform: translateY(-2px); 
+}
+
+/* Active (click) effects for buttons */
+.overlay button:active {
+  -webkit-transform: translateY(0); /* Reset position */
+  transform: translateY(0); 
+  box-shadow: 0 0 10px #00ffff; /* Reduced glow */
+}
+
+/* Focus style for keyboard accessibility */
+.overlay button:focus-visible {
+  outline: 2px solid #00ffff; /* Bright cyan outline */
+  outline-offset: 4px;
+}
+
+/* Keyframe animation for pulsing effect */
+@-webkit-keyframes pulse {
+  0% { -webkit-transform: scale(1); transform: scale(1); }
+  50% { -webkit-transform: scale(1.1); transform: scale(1.1); }
+  100% { -webkit-transform: scale(1); transform: scale(1); }
+}
+@keyframes pulse {
+  0% { -webkit-transform: scale(1); transform: scale(1); }
+  50% { -webkit-transform: scale(1.1); transform: scale(1.1); }
+  100% { -webkit-transform: scale(1); transform: scale(1); }
+}
+
+/* Responsive design adjustments for smaller screens */
+@media (max-width: 820px) {
+  #game-container {
+    width: 95vw; /* Occupy 95% of viewport width */
+    height: calc(95vw * 0.75); /* Maintain 4:3 aspect ratio */
+    max-height: 95vh; /* Don't exceed 95% of viewport height */
+  }
+  .overlay h1 { font-size: 3em; }
+  .overlay p { font-size: 1em; }
+  .overlay button { font-size: 1.2em; padding: 12px 25px; }
+  #ui { font-size: 16px; } /* Smaller UI font size */
+  .rewards { 
+    top: auto; 
+    bottom: 15px; 
+    right: 15px; 
+    flex-direction: row; /* Keep rewards in a row */
+    gap: 5px;
+  }
+  .reward-indicator { font-size: 20px; } /* Smaller reward icons */
+}
