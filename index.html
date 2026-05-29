@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cosmic Drift</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Main game container with ARIA for accessibility -->
+  <div id="game-container" role="application" aria-label="Cosmic Drift game arena">
+    <!-- Main Canvas -->
+    <canvas id="game-canvas" width="800" height="600" tabindex="0" aria-label="Game canvas for avoiding obstacles and collecting rewards">
+      Your browser does not support the HTML5 canvas tag.
+    </canvas>
+    <!-- UI area -->
+    <div id="ui">
+      <!-- Health display, aria-live for screen readers -->
+      <div class="health">Health: <span id="health" aria-live="polite">100</span></div>
+      <!-- Score display, aria-live for screen readers -->
+      <div class="score">Score: <span id="score" aria-live="polite">0</span></div>
+      <!-- Level display, aria-live for screen readers -->
+      <div class="level">Level: <span id="level" aria-live="polite">1</span></div>
+      <!-- Reward indicators with appropriate ARIA labels -->
+      <div class="rewards">
+        <!-- Invincible reward indicator -->
+        <span id="invincible-reward" class="reward-indicator shield" aria-label="Invincible reward active"></span>
+        <!-- Shooter reward indicator -->
+        <span id="shooter-reward" class="reward-indicator gun" aria-label="Shooter reward active"></span>
+        <!-- Health reward indicator -->
+        <span id="health-reward" class="reward-indicator health-icon" aria-label="Health pack reward active"></span>
+        <!-- Turbo reward indicator -->
+        <span id="turbo-reward" class="reward-indicator turbo" aria-label="Turbo speed reward active"></span>
+      </div>
+    </div>
+    <!-- Start overlay screen -->
+    <div id="start-screen" class="overlay">
+      <h1>Cosmic Drift</h1>
+      <p class="instruction-text">Use WASD or arrow keys to navigate your spaceship.</p>
+      <p class="instruction-text">Dodge asteroids and collect rewards to survive!</p>
+      <p class="highest-score">Highest Score: <span id="highest-score-display">0</span></p>
+
+      <button id="start-btn" aria-label="Start Game">Start Game</button>
+    </div>
+    <!-- Game over overlay screen -->
+    <div id="game-over-screen" class="overlay">
+      <h1>Game Over</h1>
+      <p>Final Score: <span id="final-score">0</span></p>
+      <p class="highest-score">Highest Score: <span id="game-over-highest-score">0</span></p>
+      <button id="restart-btn" aria-label="Restart Game">Restart</button>
+    </div>
+  </div>
+  <!-- Script loaded last to ensure DOM is ready -->
+  <script src="script.js"></script>
+</body>
+</html>
