@@ -33,10 +33,11 @@ body {
   border: 2px solid #5a5a7a; /* Subtle metallic border */
   border-radius: 12px; /* Rounded corners for modern look */
   /* Glowing box shadow for cyberpunk feel */
+  -webkit-box-shadow: 0 0 30px rgba(80, 80, 150, 0.4), 0 0 15px rgba(255, 255, 255, 0.1);
   box-shadow: 0 0 30px rgba(80, 80, 150, 0.4), 0 0 15px rgba(255, 255, 255, 0.1);
   overflow: hidden; /* Important to contain game elements within bounds */
-  /* Dynamic background for nebula effect, controlled by JS drawing */
-  background-color: #000000; /* Default background for canvas if JS fails */
+  /* Dynamic background for canvas, controlled by JS drawing */
+  background-color: #000000; /* Fallback background for canvas if JS fails */
 }
 
 /* Canvas element for game rendering */
@@ -181,6 +182,7 @@ body {
   border: none;
   border-radius: 8px;
   cursor: pointer;
+  -webkit-box-shadow: 0 0 15px #00ffff; /* Glowing button shadow */
   box-shadow: 0 0 15px #00ffff; /* Glowing button shadow */
   /* Smooth transition for hover effects */
   -webkit-transition: all 0.3s ease;
@@ -192,6 +194,7 @@ body {
 /* Hover effects for buttons */
 .overlay button:hover {
   background-color: #00e6e6; /* Slightly lighter cyan */
+  -webkit-box-shadow: 0 0 25px #00ffff, 0 0 5px #ffffff; /* More intense glow */
   box-shadow: 0 0 25px #00ffff, 0 0 5px #ffffff; /* More intense glow */
   -webkit-transform: translateY(-2px); /* Lift button slightly */
   transform: translateY(-2px); 
@@ -201,6 +204,7 @@ body {
 .overlay button:active {
   -webkit-transform: translateY(0); /* Reset position */
   transform: translateY(0); 
+  -webkit-box-shadow: 0 0 10px #00ffff; /* Reduced glow */
   box-shadow: 0 0 10px #00ffff; /* Reduced glow */
 }
 
